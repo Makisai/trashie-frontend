@@ -1,0 +1,16 @@
+@import './base.css';
+
+#main-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+}
+a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+a:hover {
+  font-weight: bold;
+}
