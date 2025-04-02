@@ -5,12 +5,14 @@
     <nav>
       <ul>
         <li>
-          <a href="#">
+          <router-link to="/">
+          <a>
             <div>
               <img alt="Vue logo" class="logo" src="@/assets/logo_animation.gif" />
               <img
                 alt="trahie name animation" class="title" src="@/assets/nametag_animation.gif"/>
             </div></a>
+          </router-link>
         </li>
         <li><router-link to="/"><a>Movies</a></router-link></li>
         <li><router-link to="/watchparty"><a>Watchpartys</a></router-link></li>
@@ -27,6 +29,10 @@ nav ul {
   align-items: center;
   gap: 1rem;
   padding-left: 0rem;
+}
+
+.router-link-active {
+  font-weight: bold;
 }
 
 .logo {

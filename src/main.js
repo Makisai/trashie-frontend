@@ -9,7 +9,7 @@ const router = createRouter({
     routes: [
         { path: '/', name: 'Dashboard', component: () => import('./views/AppDashboard.vue') },
         { path: '/watchparty' , name: 'WatchParty', component: () => import('./views/WatchParty.vue') },
-        //{ path:'movies/:id',name:'MovieDetails',component: () => import('./views/MovieDetail.vue') },
+        { path:'/movies/:id',name:'MovieDetails',component: () => import('./views/MovieDetail.vue') },
     ],
 })
 
