@@ -1,6 +1,6 @@
 <script setup>
-import MovieCard from './MovieCard.vue'
-import FAB from './FAB.vue'
+import MovieCard from '../components/MovieCard.vue'
+import FAB from '../components/FAB.vue'
 import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -19,17 +19,6 @@ async function fetchMovies() {
   movies.value = data
 }
 
-const addMovie = async (movie) => {
-  const response = await fetch(`http://localhost:3000/movies`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(movie)
-  })
-  const data = await response.json()
-  movies.value.push(data)
-}
 </script>
 
 <template>
@@ -38,7 +27,7 @@ const addMovie = async (movie) => {
       <li v-for="movie in movies" :key="movie.id">
         <MovieCard :movie="movie"></MovieCard>
       </li>
-      <FAB @click = "addMovie"></FAB>
+      <FAB></FAB>
     </main>
   </div>
 </template>

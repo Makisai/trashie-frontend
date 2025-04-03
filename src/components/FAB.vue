@@ -1,14 +1,26 @@
 <script setup>
-    const handleClick = () => {
-        // Handle the click event for the FAB button
-        console.log('FAB clicked');
-    };
+
+import { ref } from 'vue';
+import NewMovieForm from './NewMovieForm.vue';
+
+
+const modalIsVisible = ref(false);
+
+const openModal = () => {
+  modalIsVisible.value = true;
+  console.log('Modal is open');
+};
+const closeModal = () => {
+  modalIsVisible.value = false;
+};
+    
 </script>
 
 <template>
-    <button class="fab" @click ="handleClick">
+    <button class="fab" @click ="openModal">
         <slot>+</slot>
     </button>
+    <NewMovieForm v-if="modalIsVisible" @close="closeModal"></NewMovieForm>
 </template>
 
 <style scoped>

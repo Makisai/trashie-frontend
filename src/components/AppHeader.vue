@@ -5,7 +5,7 @@
     <nav>
       <ul>
         <li>
-          <router-link to="/">
+          <router-link :to="{name: 'Dashboard'}">
           <a>
             <div>
               <img alt="Vue logo" class="logo" src="@/assets/logo_animation.gif" />
@@ -14,8 +14,8 @@
             </div></a>
           </router-link>
         </li>
-        <li><router-link to="/"><a>Movies</a></router-link></li>
-        <li><router-link to="/watchparty"><a>Watchpartys</a></router-link></li>
+        <li><router-link :to="{name: 'Dashboard'}"><a>Movies</a></router-link></li>
+        <li><router-link :to="{name: 'WatchParty'}"><a>Watchpartys</a></router-link></li>
         <li><a href="#">Logout</a></li>
       </ul>
     </nav>
