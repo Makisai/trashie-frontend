@@ -1,48 +1,57 @@
 <script setup>
-
 import { ref, defineEmits } from 'vue'
 
-
-const movies = ref([])
-const emit = defineEmits(['close']);
+const movieTitle = ref('')
+const emit = defineEmits(['close'])
 
 const closeModal = () => {
-  emit('close');
-};
-
-const addMovie = async (movie) => {
-  const response = await fetch(`http://localhost:3000/movies`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(movie)
-  })
-  const data = await response.json()
-  movies.value.push(data)
-  emit('close');
+  emit('close')
 }
 
+const addMovie = async () => {
+  const movie = {
+      name: movieTitle.value,
+  }
+
+  try {
+    const response = await fetch(`http://localhost:3000/movies`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', // JSON-Daten werden gesendet
+      },
+      body: JSON.stringify(movie), // Konvertiere das Objekt in einen JSON-String
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`)
+    }
+    const data = await response.json()
+    console.log('Film hinzugefügt:', data)
+
+    closeModal() // Schließe das Modal nach dem Hinzufügen
+  } catch (error) {
+    console.error('Fehler beim Hinzufügen des Films:', error)
+  }
+}
 </script>
 
 <template>
-<div class="modal-overlay" @click.self="closeModal">
-      <div class="modal">
-        <h2>Neuen Film hinzufügen</h2>
-        <form @submit.prevent="handleSubmit">
-          <label for="title">Titel:</label>
-          <input id="title" type="text" placeholder="Filmtitel" required />
-          <div class="modal-actions">
-            <button type="submit" @click="addMovie">Hinzufügen</button>
-            <button type="button" @click="closeModal">Abbrechen</button>
-          </div>
-        </form>
-      </div>
+  <div class="modal-overlay" @click.self="closeModal">
+    <div class="modal">
+      <h2>Neuen Film hinzufügen</h2>
+      <form>
+        <label for="movieTitle">Titel:</label>
+        <input id="movieTitle" v-model="movieTitle" type="text" placeholder="Filmtitel" required />
+        <div class="modal-actions">
+          <button type="submit" @click="addMovie">Hinzufügen</button>
+          <button type="button" @click="closeModal">Abbrechen</button>
+        </div>
+      </form>
     </div>
+  </div>
 </template>
 
-<style scoped> 
-
+<style scoped>
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -95,12 +104,12 @@ const addMovie = async (movie) => {
   cursor: pointer;
 }
 
-.modal-actions button[type="submit"] {
+.modal-actions button[type='submit'] {
   background-color: var(--tr-c-primary);
   color: white;
 }
 
-.modal-actions button[type="button"] {
+.modal-actions button[type='button'] {
   background-color: #ccc;
   color: black;
 }
